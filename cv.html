@@ -383,18 +383,169 @@
 
     /* Print styles */
     @media print {
-      body { background: #fff; font-size: 11pt; line-height: 1.5; }
+      @page {
+        size: letter;
+        margin: 0.6in 0.7in 0.8in 0.7in;
+        @bottom-center {
+          content: "Cyrus Tau - CV - Page " counter(page);
+          font-family: 'Helvetica Neue', Arial, sans-serif;
+          font-size: 8pt;
+          color: #999;
+        }
+      }
+
+      body {
+        background: #fff;
+        font-family: 'Georgia', 'Times New Roman', serif;
+        font-size: 10.5pt;
+        line-height: 1.45;
+        color: #222;
+      }
+
       nav { display: none; }
-      .cv-header { padding-top: 0; }
-      .card { border: none; padding: 0.8rem 0; box-shadow: none; }
-      .card:hover { box-shadow: none; }
-      .project-card { border: none; padding: 0.8rem 0; box-shadow: none; }
-      .project-card:hover { box-shadow: none; }
-      section { padding: 1.5rem 0 0.5rem; }
       footer { display: none; }
-      a { color: var(--text); }
-      .pub-badge { border: 1px solid #ccc; }
-      .tag { border: 1px solid #ccc; background: none; }
+
+      a { color: #222; text-decoration: none; }
+
+      /* Header */
+      .cv-header {
+        padding: 0 0 0.4rem 0;
+        border-bottom: 2px solid #222;
+        margin-bottom: 0;
+      }
+      .cv-header h1 { font-size: 22pt; margin-bottom: 0.1rem; }
+      .cv-header .subtitle { font-size: 10pt; margin-bottom: 0.3rem; }
+      .cv-header .contact-row {
+        font-size: 9pt;
+        gap: 0.4rem;
+        color: #444;
+      }
+      .cv-header .contact-row a { border: none; color: #444; }
+      .cv-header .contact-row span { color: #444; }
+
+      /* Sections */
+      section {
+        padding: 0.6rem 0 0.1rem;
+        page-break-inside: avoid;
+      }
+
+      section h2 {
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        font-size: 10.5pt;
+        font-weight: bold;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: #222;
+        border-bottom: 1.5px solid var(--primary);
+        padding-bottom: 0.15rem;
+        margin-bottom: 0.5rem;
+      }
+
+      /* Cards */
+      .card {
+        border: none;
+        border-radius: 0;
+        padding: 0.25rem 0;
+        margin-bottom: 0.3rem;
+        box-shadow: none;
+        background: none;
+        page-break-inside: avoid;
+      }
+      .card:hover { box-shadow: none; }
+
+      .card-header { margin-bottom: 0.05rem; }
+      .card-title { font-size: 10.5pt; }
+      .card-title a { color: #222; }
+      .card-date { font-size: 9pt; }
+      .card-subtitle { font-size: 9.5pt; margin-bottom: 0.05rem; }
+      .card-location { font-size: 8.5pt; margin-bottom: 0.2rem; }
+
+      .card ul li {
+        font-size: 9.5pt;
+        padding: 0.05rem 0 0.05rem 1rem;
+        line-height: 1.4;
+      }
+      .card ul li::before {
+        content: '\2013';
+        background: none;
+        width: auto;
+        height: auto;
+        border-radius: 0;
+        top: 0.05rem;
+        left: 0;
+        font-size: 9.5pt;
+        color: #222;
+      }
+
+      /* Awards */
+      .award-item {
+        padding: 0.2rem 0;
+        font-size: 9.5pt;
+      }
+      .award-name { font-size: 9.5pt; }
+      .award-detail { font-size: 9pt; }
+
+      /* Publications */
+      .pub-item {
+        padding: 0.3rem 0;
+        page-break-inside: avoid;
+      }
+      .pub-item .pub-title { font-size: 9.5pt; line-height: 1.4; }
+      .pub-item .pub-journal { font-size: 8.5pt; }
+
+      .pub-badge {
+        background: none !important;
+        border: none;
+        color: #444 !important;
+        font-size: 7.5pt;
+        padding: 0;
+        font-style: italic;
+      }
+      .pub-badge::before { content: '['; }
+      .pub-badge::after { content: ']'; }
+
+      /* Patent */
+      .patent-item .patent-title { font-size: 9.5pt; }
+      .patent-item .patent-detail { font-size: 8.5pt; }
+
+      /* Skills */
+      .skills-grid { gap: 0.5rem; margin-bottom: 0.8rem !important; }
+      .skill-group h3 { font-size: 8.5pt; margin-bottom: 0.2rem; }
+
+      .tag {
+        background: none;
+        border: none;
+        color: #222;
+        font-size: 9pt;
+        padding: 0;
+      }
+      .tags { gap: 0.15rem 0; flex-direction: column; }
+      .skill-group .tags { flex-direction: row; flex-wrap: wrap; gap: 0; }
+      .skill-group .tag::after { content: ',\00a0'; }
+      .skill-group .tag:last-child::after { content: ''; }
+
+      /* Projects */
+      .project-card {
+        border: none;
+        border-radius: 0;
+        padding: 0.25rem 0;
+        margin-bottom: 0.3rem;
+        box-shadow: none;
+        background: none;
+        page-break-inside: avoid;
+      }
+      .project-card:hover { box-shadow: none; }
+      .project-card .project-name { font-size: 10.5pt; }
+      .project-card .project-name a { color: #222; }
+      .project-card .project-desc { font-size: 9pt; line-height: 1.4; margin-top: 0.15rem; }
+      .project-card .project-link { font-size: 8pt; color: #666; margin-top: 0.15rem; }
+
+      /* Coursework inline style overrides */
+      div[style*="margin-top: 0.6rem"] { margin-top: 0.2rem !important; }
+      span[style*="font-size: 0.85rem"] { font-size: 8.5pt !important; }
+
+      /* For Fun links */
+      .card div[style*="margin-top: 0.5rem"] a { font-size: 8pt !important; color: #666 !important; }
     }
   </style>
 </head>
@@ -423,7 +574,7 @@
   <div class="contact-row">
     <a href="mailto:cyrus_tau@g.harvard.edu">cyrus_tau@g.harvard.edu</a>
     <span>Brookline, MA</span>
-    <a href="https://cyrustau.github.io">cyrustau.github.io</a>
+    <a href="https://cyrustau21.github.io/">cyrustau21.github.io</a>
     <a href="https://scholar.google.com/citations?user=Ulxwy0MAAAAJ&amp;hl=en" target="_blank">Google Scholar</a>
     <a href="https://x.com/cyrus_tau?lang=en" target="_blank">Twitter</a>
     <a href="https://www.linkedin.com/in/cyrus-tau-53260898/" target="_blank">LinkedIn</a>
@@ -445,7 +596,7 @@
       <li>Thesis Advisor: Gordon Fishell, Ph.D</li>
       <li>Rotations: Zhixun Dou, Ph.D; Sandeep Robert Datta, MD, Ph.D; Gordon Fishell, Ph.D</li>
       <li>NSF Graduate Research Fellowship (2024&ndash;2026)</li>
-      <li>Teaching Fellow, Genetics 201</li>
+      <li>Teaching Fellow, Genetics 201 (Fall 2025)</li>
     </ul>
     <div style="margin-top: 0.6rem;">
       <span style="font-size: 0.85rem; font-family: 'Helvetica Neue', Arial, sans-serif; color: var(--text-light); font-weight: bold;">Relevant Coursework:</span>
@@ -613,7 +764,10 @@
       Brann, D. <em>et al.</em> A spatial code governs olfactory receptor choice and aligns sensory maps in the nose and brain.
       <span class="pub-badge co-author">Co-author</span>
     </div>
-    <div class="pub-journal"><em>Cell</em> (2026).</div>
+    <div class="pub-journal">
+      <em>Cell</em> <strong>189</strong>, 3358&ndash;3379.e30 (2026).
+      <a href="https://doi.org/10.1016/j.cell.2026.03.051" target="_blank">doi:10.1016/j.cell.2026.03.051</a>
+    </div>
   </div>
 
   <div class="pub-item">
@@ -669,7 +823,7 @@
   <div class="card">
     <div class="card-header">
       <span class="card-title">Harvard University &mdash; Genetics 201</span>
-      <span class="card-date">2024 &ndash; present</span>
+      <span class="card-date">Fall 2025</span>
     </div>
     <div class="card-subtitle">Teaching Fellow</div>
     <div class="card-location">Cambridge, MA</div>
